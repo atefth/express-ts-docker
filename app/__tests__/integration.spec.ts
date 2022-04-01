@@ -36,3 +36,38 @@ describe("Tasks", () => {
     });
   });
 });
+
+describe("TaskLists", () => {
+  describe("POST /taskLists", () => {
+    it("should create a new List with title and updatedAt", async () => {
+      const res = await request(server).post("/api/v1/taskLists").send({
+        title: "Test Task List",
+        updatedAt: now(),
+      });
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty("taskListId");
+    });
+    //   it("should not create a new Task without a title and updatedAt", async () => {
+    //     const res = await request(server).post("/api/v1/taskLists").send({description: "test"});
+    //     expect(res.statusCode).toEqual(500);
+    //   });
+  });
+
+  describe("GET /taskLists/1", () => {
+    it("should get the newly created List", async () => {
+      const res = await request(server).get("/api/v1/taskLists/1").send();
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty("data");
+    });
+  });
+
+  describe("PUT /taskLists/1", () => {
+    it("should update the newly created List", async () => {
+      const res = await request(server).get("/api/v1/taskLists/1").send({
+        title: "New Title",
+        updatedAt: now(),
+      });
+      expect(res.statusCode).toEqual(200);
+    });
+  });
+});

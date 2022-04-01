@@ -9,11 +9,13 @@ dotenv.config();
 const apiVersion = 1;
 const endPoints = {
   tasks: `/api/v${apiVersion}/tasks`,
+  taskLists: `/api/v${apiVersion}/taskLists`,
 };
 
 server.use(bodyParser.json());
 
 server.use(endPoints.tasks, taskRouter);
+server.use(endPoints.taskLists, taskListRouter);
 server.get("/", (req, res) => {
   res.json({
     apiVersion,

@@ -7,3 +7,8 @@ export interface ITaskBase {
 export interface Task extends ITaskBase {
   description?: string;
 }
+
+export interface TaskList extends ITaskBase {
+  description?: string;
+  tasks: Task[];
+}
