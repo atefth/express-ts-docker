@@ -1,0 +1,1 @@
+cp .env.prod.example .env && cp .env.prod.example app/.env && cp .env.test.example app/.env.test && cd app && npm install && cd ..&& COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build && docker-compose up -d

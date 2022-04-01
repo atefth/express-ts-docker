@@ -30,7 +30,7 @@ services:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     volumes:
       - ./app:/app
-      - ./.env.example:/app/.env
+      - ./.env.prod.example:/app/.env
       - ./.env.test.example:/app/.env.test
     depends_on:
       - db
