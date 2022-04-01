@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    env_file: ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_PWD
+      MYSQL_DATABASE: $DB_NAME
+    ports:
+      - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
+    volumes:
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+      - "./app/db/migrations/001-create-tasks-table.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./app/db/seeds/001-tasks.sql:/docker-entrypoint-initdb.d/2.sql"
+      - "./app/db/migrations/002-create-task-lists-table.sql:/docker-entrypoint-initdb.d/3.sql"
+      - "./app/db/seeds/002-task-lists.sql:/docker-entrypoint-initdb.d/4.sql"
+      - "./app/db/migrations/003-create-tasks-task-lists-join-table.sql:/docker-entrypoint-initdb.d/5.sql"
+    cap_add:
+      - SYS_NICE
+  app:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    image: node-mysql-app
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    volumes:
+      - ./app:/app
+      - ./.env.example:/app/.env
+      - ./.env.test.example:/app/.env.test
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+
+volumes:
+  db-config:
+  db-data:
