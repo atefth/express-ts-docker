@@ -174,3 +174,35 @@ export const remove = (taskListId: number, callback: Function) => {
     callback(null);
   });
 };
+
+// Append To List
+export const appendToList = (
+  taskId: number,
+  taskListId: number,
+  callback: Function
+) => {
+  const queryString = `INSERT INTO tasks_task_lists (taskId, taskListId) VALUES (?, ?)`;
+
+  db.query(queryString, [taskId, taskListId], (err, result) => {
+    if (err) {
+      return callback(err);
+    }
+    callback(null);
+  });
+};
+
+// Remove From List
+export const removeFromList = (
+  taskId: number,
+  taskListId: number,
+  callback: Function
+) => {
+  const queryString = `DELETE FROM tasks_task_lists WHERE taskId=? AND taskListId=?`;
+
+  db.query(queryString, [taskId, taskListId], (err, result) => {
+    if (err) {
+      return callback(err);
+    }
+    callback(null);
+  });
+};

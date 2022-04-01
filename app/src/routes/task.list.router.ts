@@ -58,4 +58,40 @@ taskListRouter.delete("/:id", async (req: Request, res: Response) => {
   });
 });
 
+taskListRouter.put("/:id/add", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { taskId } = req.body;
+  const errors = [];
+  if (!id) errors.push({ message: "No list id provided!" });
+  if (!taskId) errors.push({ message: "No task id provided!" });
+  if (errors.length) {
+    return res.status(500).json({ errors });
+  }
+  taskListModel.appendToList(Number(taskId), Number(id), (err: Error) => {
+    if (err) {
+      return res.status(500).json({ message: err.message });
+    }
+    res.status(200).json({ message: `Task ${taskId} added to List ${id}` });
+  });
+});
+
+taskListRouter.put("/:id/remove", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { taskId } = req.body;
+  const errors = [];
+  if (!id) errors.push({ message: "No list id provided!" });
+  if (!taskId) errors.push({ message: "No task id provided!" });
+  if (errors.length) {
+    return res.status(500).json({ errors });
+  }
+  taskListModel.removeFromList(Number(taskId), Number(id), (err: Error) => {
+    if (err) {
+      return res.status(500).json({ message: err.message });
+    }
+    res
+      .status(200)
+      .json({ message: `Task ${taskId} removed from List ${id}` });
+  });
+});
+
 export { taskListRouter };
