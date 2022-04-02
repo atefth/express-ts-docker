@@ -4,9 +4,9 @@
   "description": "RESTful node api",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node ./dist/server.js ",
+    "start": "tsc && node ./dist/src/server.js ",
     "start:dev": "nodemon",
-    "start:prod": "tsc && node ./dist/server.js --production ",
+    "start:prod": "tsc && node ./dist/src/server.js --production ",
     "migrate": "./scripts/db/migrate.sh",
     "migrate:reset": "./scripts/db/reset.sh",
     "test": "ENV_FILE=./.env.test jest --testTimeout=10000",
