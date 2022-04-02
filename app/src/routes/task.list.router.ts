@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import * as taskListModel from "../models/task.list";
 import { TaskList } from "../types.d";
-const taskListRouter = express.Router();
+const taskListRouter = express.Router({ mergeParams: true });
 
 taskListRouter.get("/", async (req: Request, res: Response) => {
   taskListModel.findAll((err: Error, taskLists: TaskList[]) => {

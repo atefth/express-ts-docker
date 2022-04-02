@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import * as taskModel from "../models/task";
 import { Task } from "../types";
-const taskRouter = express.Router();
+const taskRouter = express.Router({ mergeParams: true });
 
 taskRouter.get("/", async (req: Request, res: Response) => {
   taskModel.findAll((err: Error, tasks: Task[]) => {
@@ -48,7 +48,8 @@ taskRouter.put("/:id", async (req: Request, res: Response) => {
 });
 
 taskRouter.delete("/:id", async (req: Request, res: Response) => {
-  if (!req.params.id) return res.status(500).json({ message: "No id provided!" });
+  if (!req.params.id)
+    return res.status(500).json({ message: "No id provided!" });
   taskModel.remove(Number(req.params.id), (err: Error) => {
     if (err) {
       return res.status(500).json({ message: err.message });
