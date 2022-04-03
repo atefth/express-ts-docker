@@ -1,6 +1,4 @@
-use task_management;
-
-create table tasks_task_lists (
+create table if not exists tasks_task_lists (
     taskId int,
     taskListId int,
     primary key (taskId, taskListId),

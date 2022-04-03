@@ -27,10 +27,11 @@ Endpoint is `api/v1/taskLists` with standard CRUD operations and additional rout
 
 ## Tests
 
-All tests can be run by executing `npm run test` inside `app` dir. **(Running tests will destroy any data in db)**
+All tests can be run by executing `npm run pretest && npm run test` inside `app` dir.
 
 ## Development / Debugging
 
+Set `NODE_ENV` in **environemnt** file to `dev`.
 Update `app/Dockerfile` at line 13
 
 `CMD [ "npm", "run", "start:prod" ]`
@@ -38,3 +39,7 @@ to
 `CMD [ "npm", "run", "start:dev" ]`
 
 Rebuild and start container
+
+## Deploy Serverless Lambda Fcuntions
+
+`npm run sls:deploy`

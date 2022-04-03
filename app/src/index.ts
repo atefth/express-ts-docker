@@ -10,8 +10,8 @@ dotenv.config();
 app.use(cors());
 app.use(bodyParser.json());
 
-export const apiVersion = 1;
-export const endPoints = {
+const apiVersion = 1;
+const endPoints = {
   tasks: `/api/v${apiVersion}/tasks`,
   taskLists: `/api/v${apiVersion}/taskLists`,
 };

@@ -1,6 +1,10 @@
 service: api
+plugins:
+  - serverless-dotenv-plugin
 
 frameworkVersion: "3"
+
+useDotenv: true
 
 provider:
   name: aws
@@ -9,16 +13,9 @@ provider:
   stage: dev
   region: us-east-1
 
-environment:
-  DB_HOST: task-management.cczbfcrhtkfl.us-east-1.rds.amazonaws.com
-  DB_PORT: 3306
-  DB_NAME: task_management
-  DB_USER: root
-  DB_PWD: rootroot
-
 functions:
-  api-version:
-    handler: dist/api/handler.handler
+  handler:
+    handler: api/handler.handle
     events:
       - http:
           path: /
@@ -28,16 +25,3 @@ functions:
           path: /{proxy+}
           method: any
           cors: true
-#    environment:
-#      variable2: value2
-
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"

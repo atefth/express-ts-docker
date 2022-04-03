@@ -30,8 +30,7 @@ services:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     volumes:
       - ./app:/app
-      - ./.env.prod.example:/app/.env
-      - ./.env.test.example:/app/.env.test
+      - ./.env.example:/app/.env
     depends_on:
       - db
     stdin_open: true

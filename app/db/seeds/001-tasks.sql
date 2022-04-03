@@ -1,5 +1,3 @@
-use task_management;
-
 insert into tasks (title, description, updatedAt) values ('First Task!', 'Foo Baz', NOW());
 insert into tasks (title, description, updatedAt) values ('New Task!', 'Oh No', NOW());
 insert into tasks (title, description, updatedAt) values ('Hello', 'World', NOW());
