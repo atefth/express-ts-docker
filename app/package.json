@@ -4,24 +4,31 @@
   "description": "RESTful node api",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node ./dist/src/server.js ",
+    "start": "tsc && node ./dist/src/server.js",
     "start:dev": "nodemon",
-    "start:prod": "tsc && node ./dist/src/server.js --production ",
+    "start:prod": "tsc && node ./dist/src/server.js --production",
+    "build": "tsc",
+    "sls:deploy": "./scripts/setup/deploy.sh",
     "migrate": "./scripts/db/migrate.sh",
     "migrate:reset": "./scripts/db/reset.sh",
-    "test": "ENV_FILE=./.env.test jest --testTimeout=10000",
-    "pretest": "ENV_FILE=./.env.test npm run migrate:reset"
+    "pretest": "npm run migrate:reset && npm run migrate",
+    "test": "jest --testTimeout=10000"
   },
   "author": "atefth@gmail.com",
   "license": "MIT",
   "dependencies": {
+    "aws-serverless-express": "^3.4.0",
     "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "serverless-http": "^2.7.0"
   },
   "devDependencies": {
+    "@types/aws-serverless-express": "^3.3.5",
     "@types/body-parser": "^1.19.2",
+    "@types/cors": "^2.8.12",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
@@ -31,6 +38,7 @@
     "cross-env": "^7.0.3",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
+    "serverless-dotenv-plugin": "^3.12.2",
     "supertest": "^6.2.2",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",

@@ -1,0 +1,27 @@
+service: api
+plugins:
+  - serverless-dotenv-plugin
+
+frameworkVersion: "3"
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+  stage: dev
+  region: us-east-1
+
+functions:
+  handler:
+    handler: dist/api/handler.handle
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: any
+          cors: true

@@ -3,3 +3,5 @@ app/node_modules
 .env.test
 app/.env
 app/dist
+app/.serverless
+.DS_STORE
